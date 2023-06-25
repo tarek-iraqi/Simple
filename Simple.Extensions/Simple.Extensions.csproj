@@ -1,11 +1,48 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+      <TargetFramework>netstandard2.0</TargetFramework>
+	  <EnablePackageValidation>true</EnablePackageValidation>
+	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	  <!-- If all members are not documented, you can disable the compiler warnings -->
+	  <NoWarn>$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>
-
+	
+    <PropertyGroup>
+		<PackageId>Simple.Extensions</PackageId>
+		<Version>1.0.0</Version>
+		<Company>COMPANY_NAME</Company>
+	    <Authors>Tarek Iraqi</Authors>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/tarek-iraqi/Simple-extensions</RepositoryUrl>
+	    <Description>
+			This is a simple extension library for most basic types in .Net which extending their functionality
+			to do more useful tasks easy and in clean way without writing to much code or repeat the same simple code
+			multiple time.
+		</Description>
+	    <PackageProjectUrl></PackageProjectUrl>
+	    <PackageTags>simple, library, extensions, base types, C#</PackageTags>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageIcon>icon.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
+	
   <ItemGroup>
+    <PackageReference Include="DotNet.ReproducibleBuilds" Version="1.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="MinVer" Version="4.3.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="System.Text.Json" Version="7.0.3" />
   </ItemGroup>
+
+	<ItemGroup>
+		<None Include="LICENSE.txt" Pack="true" PackagePath=""/>
+		<None Include="icon.png" Pack="true" PackagePath=""/>
+		<None Include="README.md" Pack="true" PackagePath=""/>
+	</ItemGroup>
 
 </Project>
