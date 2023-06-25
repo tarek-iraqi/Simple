@@ -21,7 +21,7 @@
 			to do more useful tasks easy and in clean way without writing to much code or repeat the same simple code
 			multiple time.
 		</Description>
-	    <PackageProjectUrl>https://diverse-code.com/projects/simple-extensions</PackageProjectUrl>
+	    <!--<PackageProjectUrl>https://diverse-code.com/projects/simple-extensions</PackageProjectUrl>-->
 	    <PackageTags>simple, library, extensions, base types, C#</PackageTags>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageIcon>icon.png</PackageIcon>
