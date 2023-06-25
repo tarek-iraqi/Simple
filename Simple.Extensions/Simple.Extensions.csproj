@@ -2,7 +2,7 @@
 
   <PropertyGroup>
       <TargetFramework>netstandard2.0</TargetFramework>
-	  <EnablePackageValidation>true</EnablePackageValidation>
+	  <EnablePackageValidation>True</EnablePackageValidation>
 	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
 	  <!-- If all members are not documented, you can disable the compiler warnings -->
 	  <NoWarn>$(NoWarn);CS1591</NoWarn>
@@ -27,6 +27,10 @@
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
+	
+	<PropertyGroup>
+		<MinVerIgnoreHeight>true</MinVerIgnoreHeight>
+	</PropertyGroup>
 	
   <ItemGroup>
     <PackageReference Include="DotNet.ReproducibleBuilds" Version="1.1.1">
