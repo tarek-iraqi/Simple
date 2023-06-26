@@ -11,13 +11,12 @@
 	
     <PropertyGroup>
 		<PackageId>Simple.Extensions</PackageId>
-		<Version>1.0.0</Version>
 		<Company>Diverse Code</Company>
 	    <Authors>Tarek Iraqi</Authors>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/tarek-iraqi/Simple-extensions</RepositoryUrl>
 	    <Description>
-			This is a simple extension library for most basic types in .Net which extending their functionality to do more useful tasks easy and in clean way without writing to much code or repeat the same simple code multiple time.
+			This is a simple extension library for most basic types in .Net which extending their functionality to do more useful tasks easy and in clean way without writing too much code or repeat the same simple code multiple times.
 		</Description>
 	    <!--<PackageProjectUrl>https://diverse-code.com/projects/simple-extensions</PackageProjectUrl>-->
 	    <PackageTags>simple, library, extensions, base types, C#</PackageTags>
@@ -43,8 +42,8 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<None Include="../README.md" Pack="true" PackagePath=""/>
-		<None Include="../icon.png" Pack="true" PackagePath=""/>
-		<None Include="../LICENSE.txt" Pack="true" PackagePath=""/>
+		<None Include="../README.md" Pack="true" PackagePath="" />
+		<None Include="../icon.png" Pack="true" PackagePath="" />
+		<None Include="../LICENSE.txt" Pack="true" PackagePath="" />
 	</ItemGroup>
 </Project>
