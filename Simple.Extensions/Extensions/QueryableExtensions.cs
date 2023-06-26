@@ -40,16 +40,16 @@ namespace Simple.Extensions
         }
 
         /// <summary>
-        /// Apply Where expression with if condtion
+        /// Filters a sequence of values based on a predicate with apply predicate condtion either to apply the predicate or not
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="source"></param>
-        /// <param name="expression"></param>
-        /// <param name="condition"></param>
-        /// <returns>Return IQueryable with Where expression If condtion is true else return the same IQuerable without Where</returns>
+        /// <typeparam name="T">The type of the elements of source</typeparam>
+        /// <param name="source">IQueryable to filter</param>
+        /// <param name="predicate">A function to test each element for a condition</param>
+        /// <param name="applyPredicate">A function which determines applying the predicate or not</param>
+        /// <returns>Return IQueryable that contains elements from the input sequence that satisfy the condition specified by predicate if the applyPredicate is true</returns>
         public static IQueryable<T> WhereIf<T>(this IQueryable<T> source,
-            Expression<Func<T, bool>> expression,
-            Func<bool> condition)
-        => condition() ? source.Where(expression) : source;
+            Expression<Func<T, bool>> predicate,
+            Func<bool> applyPredicate)
+        => applyPredicate() ? source.Where(predicate) : source;
     }
 }

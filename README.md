@@ -38,10 +38,18 @@ soon as well.
 | Method | Description |
 | -- | -- |
 | ToPaginatedListAsync\<T> | A very simple method for pagination, it is generic which can work on your main entity or projection type. It takes page number and page size and handle the pagination calculations and returns two objects, the first one is the `IEnumerable<T>` with the specified number of records and meta data object with pagination data |
+| WhereIf\<T> | Filters a sequence of values based on a predicate with apply predicate condtion either to apply the predicate or not |
+
+### Enumerable Extensions:
+| Method | Description |
+| -- | -- |
+| WhereIf\<T> | Filters a sequence of values based on a predicate with apply predicate condtion either to apply the predicate or not |
+
 
 ### Enum Extensions:
 | Method | Description |
 | -- | -- |
 | GetAttribute\<TAttribute> | Direct way to retrieve any attribute data associated with `enum` type whether it is built in attribute as `DescriptionAttribute` or any custom attribute |
+
 
 You can refer to the unit tests in the repo to see some basic usage for each method.
