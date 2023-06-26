@@ -1,6 +1,8 @@
 ﻿using Simple.Extensions.BaseTypes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -36,5 +38,18 @@ namespace Simple.Extensions
 
             return new PaginatedResult<T>(items, count, pageNumber, pageSize);
         }
+
+        /// <summary>
+        /// Apply Where expression with if condtion
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="expression"></param>
+        /// <param name="condition"></param>
+        /// <returns>Return IQueryable with Where expression If condtion is true else return the same IQuerable without Where</returns>
+        public static IQueryable<T> WhereIf<T>(this IQueryable<T> source,
+            Expression<Func<T, bool>> expression,
+            Func<bool> condition)
+        => condition() ? source.Where(expression) : source;
     }
 }

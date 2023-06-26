@@ -107,4 +107,24 @@ public class QueryableExtensionsTests
         result.Meta.Previous.Should().Be(true);
         result.Meta.PageIndex.Should().Be(4);
     }
+
+    [Fact]
+    public void WhereIf_TrueCondition_FilterTheData()
+    {
+        var data = SampleData.GetSampleUsers(30);
+
+        var result = data.WhereIf(u => u.Id % 2 == 0, () => 1 == 1).ToList();
+
+        result.Count.Should().Be(15);
+    }
+
+    [Fact]
+    public void WhereIf_FalseCondition_NoFilterApplied()
+    {
+        var data = SampleData.GetSampleUsers(30);
+
+        var result = data.WhereIf(u => u.Id % 2 == 0, () => 1 == 2).ToList();
+
+        result.Count.Should().Be(30);
+    }
 }
