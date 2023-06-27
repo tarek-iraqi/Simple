@@ -13,7 +13,7 @@ namespace Simple.Extensions
         /// <param name="source">IEnumerable to filter</param>
         /// <param name="predicate">A function to test each element for a condition</param>
         /// <param name="applyPredicate">A function which determines applying the predicate or not</param>
-        /// <returns>Return IEnumerable that contains elements from the input sequence that satisfy the condition specified by predicate if the applyPredicate is true</returns>
+        /// <returns>An <see cref="IEnumerable{TSource}"/> that contains elements from the input sequence that satisfy the condition specified by <paramref name="predicate"/> if the <paramref name="applyPredicate"/> is true</returns>
         /// <exception cref="ArgumentNullException">source or predicate or applyPredicte is null</exception>
         public static IEnumerable<TSource> WhereIf<TSource>(this IEnumerable<TSource> source,
             Func<TSource, bool> predicate,
@@ -33,7 +33,7 @@ namespace Simple.Extensions
         /// <param name="source">IEnumerable to filter</param>
         /// <param name="predicate">A function to test each element for a condition</param>
         /// <param name="applyPredicate">A function which determines applying the predicate or not</param>
-        /// <returns>Return IEnumerable that contains elements from the input sequence that satisfy the condition specified by predicate if the applyPredicate is true</returns>
+        /// <returns>An <see cref="IEnumerable{TSource}"/> that contains elements from the input sequence that satisfy the condition specified by <paramref name="predicate"/> if the <paramref name="applyPredicate"/> is true</returns>
         /// <exception cref="ArgumentNullException">source or predicate or applyPredicte is null</exception>
         public static IEnumerable<TSource> WhereIf<TSource>(this IEnumerable<TSource> source,
             Func<TSource, int, bool> predicate,

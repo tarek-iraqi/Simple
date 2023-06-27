@@ -13,8 +13,8 @@ namespace Simple.Extensions
         /// <summary>
         /// Retrieve number of records with pagination data
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="source"></param>
+        /// <typeparam name="T">The type of the elements of source</typeparam>
+        /// <param name="source">An IQueryable to paginate</param>
         /// <param name="pageNumber">The number of page</param>
         /// <param name="pageSize">The amount of records per page, by default is set to 10</param>
         /// <param name="cancellationToken"></param>
@@ -49,7 +49,7 @@ namespace Simple.Extensions
         /// <param name="source">IQueryable to filter</param>
         /// <param name="predicate">A function to test each element for a condition</param>
         /// <param name="applyPredicate">A function which determines applying the predicate or not</param>
-        /// <returns>An IQueryable that contains elements from the input sequence that satisfy the condition specified by predicate if the applyPredicate is true</returns>
+        /// <returns>An <see cref="IQueryable{TSource}"/> that contains elements from the input sequence that satisfy the condition specified by <paramref name="predicate"/> if the <paramref name="applyPredicate"/> is true</returns>
         /// <exception cref="ArgumentNullException">source or predicate or applyPredicte is null</exception>
         public static IQueryable<TSource> WhereIf<TSource>(this IQueryable<TSource> source,
             Expression<Func<TSource, bool>> predicate,
@@ -69,7 +69,7 @@ namespace Simple.Extensions
         /// <param name="source">IQueryable to filter</param>
         /// <param name="predicate">A function to test each element for a condition</param>
         /// <param name="applyPredicate">A function which determines applying the predicate or not</param>
-        /// <returns>An IQueryable that contains elements from the input sequence that satisfy the condition specified by predicate if the applyPredicate is true</returns>
+        /// <returns>An <see cref="IQueryable{TSource}"/> that contains elements from the input sequence that satisfy the condition specified by <paramref name="predicate"/> if the <paramref name="applyPredicate"/> is true</returns>
         /// <exception cref="ArgumentNullException">source or predicate or applyPredicte is null</exception>
         public static IQueryable<TSource> WhereIf<TSource>(this IQueryable<TSource> source,
             Expression<Func<TSource, int, bool>> predicate,

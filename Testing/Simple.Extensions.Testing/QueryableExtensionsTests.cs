@@ -148,6 +148,7 @@ public class QueryableExtensionsTests
         Action act = () => data.WhereIf(u => u.Id % 2 == 0, () => 1 == 2).ToList();
 
         act.Should().Throw<ArgumentNullException>()
+            .WithParameterName("source")
             .WithMessage("Value cannot be null. (Parameter 'source')");
     }
 
@@ -161,6 +162,7 @@ public class QueryableExtensionsTests
         Action act = () => data.WhereIf(predicate, () => 1 == 2).ToList();
 
         act.Should().Throw<ArgumentNullException>()
+            .WithParameterName("predicate")
             .WithMessage("Value cannot be null. (Parameter 'predicate')");
     }
 
@@ -174,6 +176,7 @@ public class QueryableExtensionsTests
         Action act = () => data.WhereIf(u => u.Id % 2 == 0, applyPredicate).ToList();
 
         act.Should().Throw<ArgumentNullException>()
+            .WithParameterName("applyPredicate")
             .WithMessage("Value cannot be null. (Parameter 'applyPredicate')");
     }
 }
