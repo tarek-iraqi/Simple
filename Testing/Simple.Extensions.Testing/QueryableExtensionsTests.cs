@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Simple.Extensions.Testing.Helpers;
+using System.Linq.Expressions;
 
 namespace Simple.Extensions.Testing;
 public class QueryableExtensionsTests
@@ -109,6 +110,17 @@ public class QueryableExtensionsTests
     }
 
     [Fact]
+    public async Task ToPaginatedListAsync_SourceIsNull_ThrowArgumentNullException()
+    {
+        IQueryable<SampleData.Person> data = null;
+
+        var act = async () => await data.ToPaginatedListAsync(4, 10);
+
+        await act.Should().ThrowAsync<ArgumentNullException>()
+                 .WithMessage("Value cannot be null. (Parameter 'source')");
+    }
+
+    [Fact]
     public void WhereIf_TrueCondition_FilterTheData()
     {
         var data = SampleData.GetSampleUsers(30);
@@ -126,5 +138,42 @@ public class QueryableExtensionsTests
         var result = data.WhereIf(u => u.Id % 2 == 0, () => 1 == 2).ToList();
 
         result.Count.Should().Be(30);
+    }
+
+    [Fact]
+    public void WhereIf_SourceIsNull_ThrowArgumentNullException()
+    {
+        IQueryable<SampleData.Person> data = default;
+
+        Action act = () => data.WhereIf(u => u.Id % 2 == 0, () => 1 == 2).ToList();
+
+        act.Should().Throw<ArgumentNullException>()
+            .WithMessage("Value cannot be null. (Parameter 'source')");
+    }
+
+    [Fact]
+    public void WhereIf_PredicateIsNull_ThrowArgumentNullException()
+    {
+        var data = SampleData.GetSampleUsers(30);
+
+        Expression<Func<SampleData.Person, bool>> predicate = null;
+
+        Action act = () => data.WhereIf(predicate, () => 1 == 2).ToList();
+
+        act.Should().Throw<ArgumentNullException>()
+            .WithMessage("Value cannot be null. (Parameter 'predicate')");
+    }
+
+    [Fact]
+    public void WhereIf_ApplyPredicateIsNull_ThrowArgumentNullException()
+    {
+        var data = SampleData.GetSampleUsers(30);
+
+        Func<bool> applyPredicate = null;
+
+        Action act = () => data.WhereIf(u => u.Id % 2 == 0, applyPredicate).ToList();
+
+        act.Should().Throw<ArgumentNullException>()
+            .WithMessage("Value cannot be null. (Parameter 'applyPredicate')");
     }
 }
