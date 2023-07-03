@@ -64,4 +64,257 @@ public class EnumerableExtensionsTests
             .WithParameterName("applyPredicate")
             .WithMessage("Value cannot be null. (Parameter 'applyPredicate')");
     }
+
+    [Fact]
+    public void HasDuplicates_SequeceContainDuplicates_ReturnTrue()
+    {
+        var data = new int[] { 1, 2, 3, 4, 2, 4, 5, 6, 7 };
+
+        var result = data.HasDuplicates();
+
+        result.Should().BeTrue();
+    }
+
+    [Fact]
+    public void HasDuplicates_SequeceWithNoDuplicates_ReturnFalse()
+    {
+        var data = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+
+        var result = data.HasDuplicates();
+
+        result.Should().BeFalse();
+    }
+
+    [Fact]
+    public void HasDuplicates_EmptySequence_ReturnFalse()
+    {
+        var data = Array.Empty<int>();
+
+        var result = data.HasDuplicates();
+
+        result.Should().BeFalse();
+    }
+
+    [Fact]
+    public void HasDuplicates_DuplicateObjectSequence_ReturnTrue()
+    {
+        var result = SampleData.DuplicateUsers.HasDuplicates();
+
+        result.Should().BeTrue();
+    }
+
+    [Fact]
+    public void HasDuplicates_UniqueObjectSequence_ReturnFalse()
+    {
+        var result = SampleData.UniqueUsers.HasDuplicates();
+
+        result.Should().BeFalse();
+    }
+
+    [Fact]
+    public void FindDuplicates_EmptySequence_ReturnEmptySequence()
+    {
+        var data = Array.Empty<int>();
+
+        var result = data.FindDuplicates();
+
+        result.Count().Should().Be(0);
+    }
+
+    [Fact]
+    public void FindDuplicates_SequeceContainDuplicates_ReturnSequenceWithDuplicateElements()
+    {
+        var data = new int[] { 1, 2, 3, 4, 2, 4, 5, 6, 7 };
+
+        var result = data.FindDuplicates();
+
+        result.Count().Should().Be(2);
+        result.Should().Contain(2);
+        result.Should().Contain(4);
+    }
+
+    [Fact]
+    public void FindDuplicates_SequeceWithNoDuplicates_ReturnEmptySequence()
+    {
+        var data = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+
+        var result = data.FindDuplicates();
+
+        result.Count().Should().Be(0);
+    }
+
+    [Fact]
+    public void FindDuplicates_DuplicateObjectSequence_ReturnDuplicateObjects()
+    {
+        var result = SampleData.DuplicateUsers.FindDuplicates();
+
+        result.Count().Should().Be(2);
+        result.Should().Contain(new User { Id = 1, Name = "a" });
+        result.Should().Contain(new User { Id = 2, Name = "e" });
+    }
+
+    [Fact]
+    public void FindDuplicates_UniqueObjectSequence_ReturnEmptySequence()
+    {
+        var result = SampleData.UniqueUsers.FindDuplicates();
+
+        result.Count().Should().Be(0);
+    }
+
+    [Fact]
+    public void RemoveDuplicates_SequeceWithNoDuplicates_ReturnOriginalSequence()
+    {
+        var data = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+
+        var result = data.RemoveDuplicates();
+
+        result.Count().Should().Be(data.Length);
+    }
+
+    [Fact]
+    public void RemoveDuplicates_EmptySequence_ReturnEmptySequence()
+    {
+        var data = Array.Empty<int>();
+
+        var result = data.RemoveDuplicates();
+
+        result.Count().Should().Be(0);
+    }
+
+    [Fact]
+    public void RemoveDuplicates_SequeceContainDuplicates_ReturnSequenceWithUniqueElements()
+    {
+        var data = new int[] { 1, 2, 3, 4, 2, 4, 5, 6, 7 };
+
+        var result = data.RemoveDuplicates();
+
+        result.Count().Should().Be(data.Length - 2);
+        result.Should().Contain(1);
+        result.Should().Contain(2);
+        result.Should().Contain(3);
+        result.Should().Contain(4);
+        result.Should().Contain(5);
+        result.Should().Contain(6);
+        result.Should().Contain(7);
+    }
+
+    [Fact]
+    public void RemoveDuplicates_DuplicateObjectSequence_ReturnSequenceWithUniqueElements()
+    {
+        var result = SampleData.DuplicateUsers.RemoveDuplicates();
+
+        result.Count().Should().Be(SampleData.DuplicateUsers.Count() - 2);
+        result.Should().Contain(new User() { Id = 1, Name = "a" });
+        result.Should().Contain(new User() { Id = 2, Name = "b" });
+        result.Should().Contain(new User() { Id = 3, Name = "c" });
+        result.Should().Contain(new User() { Id = 4, Name = "d" });
+    }
+
+    [Fact]
+    public void RemoveDuplicates_UniqueObjectSequence_ReturnOriginalSequence()
+    {
+        var result = SampleData.UniqueUsers.RemoveDuplicates();
+
+        result.Count().Should().Be(SampleData.UniqueUsers.Count());
+        result.Should().Contain(new User() { Id = 1, Name = "a" });
+        result.Should().Contain(new User() { Id = 2, Name = "b" });
+        result.Should().Contain(new User() { Id = 3, Name = "c" });
+        result.Should().Contain(new User() { Id = 4, Name = "d" });
+    }
+
+    [Fact]
+    public void CountDuplicates_SequeceWithNoDuplicates_ReturnEmptyDic()
+    {
+        var data = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+
+        var result = data.CountDuplicates();
+
+        result.Count.Should().Be(0);
+    }
+
+    [Fact]
+    public void CountDuplicates_EmptySequence_ReturnEmptyDic()
+    {
+        var data = Array.Empty<int>();
+
+        var result = data.CountDuplicates();
+
+        result.Count.Should().Be(0);
+    }
+
+    [Fact]
+    public void CountDuplicates_SequeceContainDuplicates_ReturnDuplicatesWithCount()
+    {
+        var data = new int[] { 1, 2, 3, 4, 2, 4, 5, 6, 7 };
+
+        var result = data.CountDuplicates();
+
+        result.Count.Should().Be(2);
+        result.Should().Contain(new KeyValuePair<int, int>(2, 2));
+        result.Should().Contain(new KeyValuePair<int, int>(4, 2));
+    }
+
+    [Fact]
+    public void CountDuplicates_DuplicateObjectSequence_ReturnDuplicatesWithCount()
+    {
+        var result = SampleData.DuplicateUsers.CountDuplicates();
+
+        result.Count.Should().Be(2);
+        result.Should().Contain(new KeyValuePair<User, int>(new User() { Id = 1, Name = "a" }, 2));
+        result.Should().Contain(new KeyValuePair<User, int>(new User() { Id = 2, Name = "e" }, 2));
+    }
+
+    [Fact]
+    public void CountDuplicates_UniqueObjectSequence_ReturnEmptyDic()
+    {
+        var result = SampleData.UniqueUsers.CountDuplicates();
+
+        result.Count.Should().Be(0);
+    }
+
+    [Fact]
+    public void TotalDuplicates_SequeceWithNoDuplicates_ReturnZero()
+    {
+        var data = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+
+        var result = data.TotalDuplicates();
+
+        result.Should().Be(0);
+    }
+
+    [Fact]
+    public void TotalDuplicates_EmptySequence_ReturnZero()
+    {
+        var data = Array.Empty<int>();
+
+        var result = data.TotalDuplicates();
+
+        result.Should().Be(0);
+    }
+
+    [Fact]
+    public void TotalDuplicates_SequeceContainDuplicates_ReturnTotalDuplicatesCount()
+    {
+        var data = new int[] { 1, 2, 3, 4, 2, 4, 5, 6, 7, 2, 5 };
+
+        var result = data.TotalDuplicates();
+
+        result.Should().Be(3);
+    }
+
+    [Fact]
+    public void TotalDuplicates_DuplicateObjectSequence_ReturnTotalDuplicatesCount()
+    {
+        var result = SampleData.DuplicateUsers.TotalDuplicates();
+
+        result.Should().Be(2);
+    }
+
+    [Fact]
+    public void TotalDuplicates_UniqueObjectSequence_ReturnZero()
+    {
+        var result = SampleData.UniqueUsers.TotalDuplicates();
+
+        result.Should().Be(0);
+    }
 }

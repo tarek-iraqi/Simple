@@ -1,4 +1,4 @@
-# Simple Extensions
+# Simple Extensions ![.Net version](https://img.shields.io/badge/.Net-netstandard2.0-blue) ![Nuget](https://img.shields.io/nuget/v/Simple.Extensions?link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FSimple.Extensions) ![release workflow](https://github.com/tarek-iraqi/Simple-extensions/actions/workflows/publish.yaml/badge.svg?event=push&branch=publish)
 This library provides simple and very direct extensions on some basic types of C#, although it
 is simple it covers some functionality we need it all the time in many places which sometimes
 casue code duplication due to its simplicity.
@@ -44,7 +44,11 @@ soon as well.
 | Method | Description |
 | -- | -- |
 | WhereIf\<T> | Filters a sequence of values based on a predicate with apply predicate condtion either to apply the predicate or not |
-
+| HasDuplicates\<T> | Determines whether a sequence contains any duplicate elements |
+| FindDuplicates\<T> | Returns duplicate elements in a sequence if exist |
+| RemoveDuplicates\<T> | Remove duplicate elements in a sequence if exist |
+| CountDuplicates\<T> | Get duplicate elements with number of duplication |
+| TotalDuplicates\<T> | Returns a number that represents how many elements in the specified sequence are duplicated |
 
 ### Enum Extensions:
 | Method | Description |
