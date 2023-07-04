@@ -1,8 +1,10 @@
 ﻿using FluentAssertions;
 using Simple.Extensions.Testing.Helpers;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Simple.Extensions.Testing;
 
+[ExcludeFromCodeCoverage]
 public class EnumerableExtensionsTests
 {
     [Fact]
@@ -28,7 +30,7 @@ public class EnumerableExtensionsTests
     [Fact]
     public void WhereIf_SourceIsNull_ThrowArgumentNullException()
     {
-        IEnumerable<SampleData.Person> data = default;
+        IEnumerable<SampleData.Person>? data = default;
 
         Action act = () => data.WhereIf(u => u.Id % 2 == 0, () => 1 == 2).ToList();
 
@@ -42,7 +44,7 @@ public class EnumerableExtensionsTests
     {
         var data = SampleData.GetSampleUsers(30).ToList();
 
-        Func<SampleData.Person, bool> predicate = null;
+        Func<SampleData.Person, bool>? predicate = null;
 
         Action act = () => data.WhereIf(predicate, () => 1 == 2).ToList();
 
@@ -56,7 +58,7 @@ public class EnumerableExtensionsTests
     {
         var data = SampleData.GetSampleUsers(30).ToList();
 
-        Func<bool> applyPredicate = null;
+        Func<bool>? applyPredicate = null;
 
         Action act = () => data.WhereIf(u => u.Id % 2 == 0, applyPredicate).ToList();
 
@@ -112,6 +114,18 @@ public class EnumerableExtensionsTests
     }
 
     [Fact]
+    public void HasDuplicates_SourceIsNull_ThrowArgumentNullException()
+    {
+        IEnumerable<int>? data = default;
+
+        Action act = () => data.HasDuplicates();
+
+        act.Should().Throw<ArgumentNullException>()
+            .WithParameterName("source")
+            .WithMessage("Value cannot be null. (Parameter 'source')");
+    }
+
+    [Fact]
     public void FindDuplicates_EmptySequence_ReturnEmptySequence()
     {
         var data = Array.Empty<int>();
@@ -159,6 +173,18 @@ public class EnumerableExtensionsTests
         var result = SampleData.UniqueUsers.FindDuplicates();
 
         result.Count().Should().Be(0);
+    }
+
+    [Fact]
+    public void FindDuplicates_SourceIsNull_ThrowArgumentNullException()
+    {
+        IEnumerable<int>? data = null;
+
+        Action act = () => data.FindDuplicates().ToList();
+
+        act.Should().Throw<ArgumentNullException>()
+            .WithParameterName("source")
+            .WithMessage("Value cannot be null. (Parameter 'source')");
     }
 
     [Fact]
@@ -223,6 +249,18 @@ public class EnumerableExtensionsTests
     }
 
     [Fact]
+    public void RemoveDuplicates_SourceIsNull_ThrowArgumentNullException()
+    {
+        IEnumerable<int>? data = default;
+
+        Action act = () => data.RemoveDuplicates().ToList();
+
+        act.Should().Throw<ArgumentNullException>()
+            .WithParameterName("source")
+            .WithMessage("Value cannot be null. (Parameter 'source')");
+    }
+
+    [Fact]
     public void CountDuplicates_SequeceWithNoDuplicates_ReturnEmptyDic()
     {
         var data = new int[] { 1, 2, 3, 4, 5, 6, 7 };
@@ -273,6 +311,18 @@ public class EnumerableExtensionsTests
     }
 
     [Fact]
+    public void CountDuplicates_SourceIsNull_ThrowArgumentNullException()
+    {
+        IEnumerable<int>? data = default;
+
+        Action act = () => data.CountDuplicates();
+
+        act.Should().Throw<ArgumentNullException>()
+            .WithParameterName("source")
+            .WithMessage("Value cannot be null. (Parameter 'source')");
+    }
+
+    [Fact]
     public void TotalDuplicates_SequeceWithNoDuplicates_ReturnZero()
     {
         var data = new int[] { 1, 2, 3, 4, 5, 6, 7 };
@@ -316,5 +366,71 @@ public class EnumerableExtensionsTests
         var result = SampleData.UniqueUsers.TotalDuplicates();
 
         result.Should().Be(0);
+    }
+
+    [Fact]
+    public void TotalDuplicates_SourceIsNull_ThrowArgumentNullException()
+    {
+        IEnumerable<int>? data = default;
+
+        Action act = () => data.TotalDuplicates();
+
+        act.Should().Throw<ArgumentNullException>()
+            .WithParameterName("source")
+            .WithMessage("Value cannot be null. (Parameter 'source')");
+    }
+
+    [Fact]
+    public void ForeEach_IntSequenceMultiplyByTwo_ReturnNewSequenceWithNewValues()
+    {
+        IEnumerable<int> data = new List<int> { 1, 2, 3, 4, 5, 6, 7 };
+
+        var result = data.ForEach(n => n * 2);
+
+        result.Count().Should().Be(7);
+        data.Should().BeEquivalentTo(data);
+        result.Should().BeEquivalentTo(new int[] { 2, 4, 6, 8, 10, 12, 14 });
+    }
+
+    [Fact]
+    public void ForeEach_UserSequenceChangeName_ReturnNewSequenceWithUpdatedName()
+    {
+        IEnumerable<User> data = new List<User> { new User { Name = "a" }, new User { Name = "b" } };
+
+        var result = data.ForEach(user =>
+        {
+            user.Name += " user";
+            return user;
+        });
+
+        result.Count().Should().Be(2);
+        data.Should().BeEquivalentTo(data);
+        result.Should().BeEquivalentTo(new List<User> { new User { Name = "a user" }, new User { Name = "b user" } });
+    }
+
+    [Fact]
+    public void ForeEach_FuncIsNull_ThrowArgumentNullException()
+    {
+        IEnumerable<int> data = new int[] { 1, 2, 3, 4 };
+
+        Func<int, int>? func = null;
+
+        Action act = () => data.ForEach(func).ToList();
+
+        act.Should().Throw<ArgumentNullException>()
+            .WithParameterName("func")
+            .WithMessage("Value cannot be null. (Parameter 'func')");
+    }
+
+    [Fact]
+    public void ForeEach_SourceIsNull_ThrowArgumentNullException()
+    {
+        IEnumerable<int>? data = default;
+
+        Action act = () => data.ForEach(n => n * 2).ToList();
+
+        act.Should().Throw<ArgumentNullException>()
+            .WithParameterName("source")
+            .WithMessage("Value cannot be null. (Parameter 'source')");
     }
 }

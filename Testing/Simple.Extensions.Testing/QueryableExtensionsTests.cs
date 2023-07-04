@@ -112,7 +112,7 @@ public class QueryableExtensionsTests
     [Fact]
     public async Task ToPaginatedListAsync_SourceIsNull_ThrowArgumentNullException()
     {
-        IQueryable<SampleData.Person> data = null;
+        IQueryable<SampleData.Person>? data = null;
 
         var act = async () => await data.ToPaginatedListAsync(4, 10);
 
@@ -143,7 +143,7 @@ public class QueryableExtensionsTests
     [Fact]
     public void WhereIf_SourceIsNull_ThrowArgumentNullException()
     {
-        IQueryable<SampleData.Person> data = default;
+        IQueryable<SampleData.Person>? data = default;
 
         Action act = () => data.WhereIf(u => u.Id % 2 == 0, () => 1 == 2).ToList();
 
@@ -157,7 +157,7 @@ public class QueryableExtensionsTests
     {
         var data = SampleData.GetSampleUsers(30);
 
-        Expression<Func<SampleData.Person, bool>> predicate = null;
+        Expression<Func<SampleData.Person, bool>>? predicate = null;
 
         Action act = () => data.WhereIf(predicate, () => 1 == 2).ToList();
 
@@ -171,7 +171,7 @@ public class QueryableExtensionsTests
     {
         var data = SampleData.GetSampleUsers(30);
 
-        Func<bool> applyPredicate = null;
+        Func<bool>? applyPredicate = null;
 
         Action act = () => data.WhereIf(u => u.Id % 2 == 0, applyPredicate).ToList();
 

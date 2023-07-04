@@ -23,7 +23,14 @@ soon as well.
 | RemoveSpecialCharacters() | Remove any special characters in the string |
 | RemoveSpaces() | Remove any spaces in the string |
 | RemoveSpecialCharactersAndSpaces() | Remove any special characters or spaces in the string |
-
+| HasSpecialCharacters() | Return `true` if the value contains any special character otherwise return `false` |
+| HasSpaces() | Return `true` if the value contains any whitespace otherwise return `false` |
+| HasSpecialCharactersOrSpaces() | Return `true` if the value contains any special character or spaces otherwise return `false`  |
+| IsValidUrl() | Return `true` if the value is valid url otherwise return `false` |
+| ExtractUrls() | Extract any valid url from the specified string |
+| IsValidEmail() | Return true if the value is valid email otherwise return false |
+| ExtractEmails() | Extract any valid email from the specified string |
+ 
 ### DateTime Extensions:
 | Method | Description |
 | -- | -- |
@@ -37,23 +44,24 @@ soon as well.
 ### Queryable Extensions:
 | Method | Description |
 | -- | -- |
-| ToPaginatedListAsync\<T> | A very simple method for pagination, it is generic which can work on your main entity or projection type. It takes page number and page size and handle the pagination calculations and returns two objects, the first one is the `IEnumerable<T>` with the specified number of records and meta data object with pagination data |
-| WhereIf\<T> | Filters a sequence of values based on a predicate with apply predicate condtion either to apply the predicate or not |
+| ToPaginatedListAsync\<T>() | A very simple method for pagination, it is generic which can work on your main entity or projection type. It takes page number and page size and handle the pagination calculations and returns two objects, the first one is the `IEnumerable<T>` with the specified number of records and meta data object with pagination data |
+| WhereIf\<T>() | Filters a sequence of values based on a predicate with apply predicate condtion either to apply the predicate or not |
 
 ### Enumerable Extensions:
 | Method | Description |
 | -- | -- |
-| WhereIf\<T> | Filters a sequence of values based on a predicate with apply predicate condtion either to apply the predicate or not |
-| HasDuplicates\<T> | Determines whether a sequence contains any duplicate elements |
-| FindDuplicates\<T> | Returns duplicate elements in a sequence if exist |
-| RemoveDuplicates\<T> | Remove duplicate elements in a sequence if exist |
-| CountDuplicates\<T> | Get duplicate elements with number of duplication |
-| TotalDuplicates\<T> | Returns a number that represents how many elements in the specified sequence are duplicated |
+| WhereIf\<T>() | Filters a sequence of values based on a predicate with apply predicate condtion either to apply the predicate or not |
+| HasDuplicates\<T>() | Determines whether a sequence contains any duplicate elements |
+| FindDuplicates\<T>() | Returns duplicate elements in a sequence if exist |
+| RemoveDuplicates\<T>() | Remove duplicate elements in a sequence if exist |
+| CountDuplicates\<T>() | Get duplicate elements with number of duplication |
+| TotalDuplicates\<T>() | Returns a number that represents how many elements in the specified sequence are duplicated |
+| ForEach\<T>() | Performs the specified Func delegate on each element of the sequence and return new sequence |
 
 ### Enum Extensions:
 | Method | Description |
 | -- | -- |
-| GetAttribute\<TAttribute> | Direct way to retrieve any attribute data associated with `enum` type whether it is built in attribute as `DescriptionAttribute` or any custom attribute |
+| GetAttribute\<T>() | Direct way to retrieve any attribute data associated with `enum` type whether it is built in attribute as `DescriptionAttribute` or any custom attribute |
 
 
 You can refer to the unit tests in the repo to see some basic usage for each method.

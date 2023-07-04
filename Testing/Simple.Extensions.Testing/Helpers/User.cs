@@ -2,11 +2,11 @@
 internal class User
 {
     public int Id { get; set; }
-    public string Name { get; set; }
-    public string Country { get; set; }
+    public string? Name { get; set; }
+    public string? Country { get; set; }
     public DateTime DateOfBirth { get; set; }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         return obj is User q && q.Id == Id;
     }
