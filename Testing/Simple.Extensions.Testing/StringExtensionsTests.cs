@@ -363,4 +363,58 @@ public class StringExtensionsTests
         result.Should().NotBeEmpty();
         result.Should().BeEquivalentTo(new[] { "ahmed@gmail.com", "whereAli@outlook.org", "vivi@koko.net" });
     }
+
+    [Theory]
+    [InlineData("")]
+    [InlineData(null)]
+    [InlineData("   ")]
+    [InlineData("~`!@#$%^&*()-_+={}[]|\\/:,<>;.?'\"")]
+    [InlineData("abcd")]
+    [InlineData("abcd<")]
+    [InlineData("abcd <>")]
+    [InlineData("abcd <h1/)")]
+    public void HasHTMLTags_TextWithNoHTML_ReturnFalse(string str)
+    {
+        str.HasHTMLTags().Should().BeFalse();
+    }
+
+    [Theory]
+    [InlineData("abcd <h1/>")]
+    [InlineData("<div>hello world</div>")]
+    [InlineData(" <div> hello world </div> ")]
+    [InlineData("abcd <h1>")]
+    [InlineData("abcd <    h1   >")]
+    [InlineData("abcd <    h1   /    >")]
+    [InlineData("<h1> abcd")]
+    public void HasHTMLTags_TextWithHTML_ReturnTrue(string str)
+    {
+        str.HasHTMLTags().Should().BeTrue();
+    }
+
+    [Theory]
+    [InlineData("", "")]
+    [InlineData(null, null)]
+    [InlineData("   ", "   ")]
+    [InlineData("~`!@#$%^&*()-_+={}[]|\\/:,<>;.?'\"", "~`!@#$%^&*()-_+={}[]|\\/:,<>;.?'\"")]
+    [InlineData("abcd", "abcd")]
+    [InlineData("abcd<", "abcd<")]
+    [InlineData("abcd <>", "abcd <>")]
+    [InlineData("abcd <h1/)", "abcd <h1/)")]
+    public void RemoveHTMLTags_TextWithNoHTML_ReturnSameText(string str, string expected)
+    {
+        str.RemoveHTMLTags().Should().Be(expected);
+    }
+
+    [Theory]
+    [InlineData("abcd <h1/>", "abcd ")]
+    [InlineData("<div>hello world</div>", "hello world")]
+    [InlineData(" <div> hello world </div> ", "  hello world  ")]
+    [InlineData("abcd <h1>", "abcd ")]
+    [InlineData("abcd <    h1   >", "abcd ")]
+    [InlineData("abcd <    h1   /    >", "abcd ")]
+    [InlineData("<h1> abcd", " abcd")]
+    public void RemoveHTMLTags_TextWithHTML_ReturnTextWithoutHTML(string str, string expected)
+    {
+        str.RemoveHTMLTags().Should().Be(expected);
+    }
 }

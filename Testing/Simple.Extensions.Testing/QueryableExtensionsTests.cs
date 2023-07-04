@@ -179,4 +179,48 @@ public class QueryableExtensionsTests
             .WithParameterName("applyPredicate")
             .WithMessage("Value cannot be null. (Parameter 'applyPredicate')");
     }
+
+    [Fact]
+    public void Sort_UnSpecifiedSort_SortedCollectionByFirstPropAscending()
+    {
+        var result = SampleData.UnSortedUsers.Sort().ToList();
+
+        result.Should().BeInAscendingOrder(u => u.Id);
+    }
+
+    [Fact]
+    public void Sort_UnKnownSortString_SortedCollectionByFirstPropAscending()
+    {
+        var result = SampleData.UnSortedUsers.Sort("dfdfd dfdfd, fdfd, fff desc").ToList();
+
+        result.Should().BeInAscendingOrder(u => u.Id);
+    }
+
+    [Fact]
+    public void Sort_SortByNameAscending_SortedCollection()
+    {
+        var result = SampleData.UnSortedUsers.Sort("name asce").ToList();
+
+        result.Should().BeInAscendingOrder(u => u.Name);
+    }
+
+    [Fact]
+    public void Sort_SortByNameDescending_SortedCollection()
+    {
+        var result = SampleData.UnSortedUsers.Sort("name d").ToList();
+
+        result.Should().BeInDescendingOrder(u => u.Name);
+    }
+
+    [Fact]
+    public void Sort_SortByNameAscAndCountryDesc_SortedCollection()
+    {
+        var data = SampleData.UnSortedUsers
+            .OrderBy(u => u.Name)
+            .ThenByDescending(u => u.Country).ToList();
+
+        var result = SampleData.UnSortedUsers.Sort("name, country desc").ToList();
+
+        data.Should().HaveCount(6).And.ContainInConsecutiveOrder(result);
+    }
 }

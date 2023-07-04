@@ -20,15 +20,17 @@ soon as well.
 | IsNull() | Return `true` if the value is null only otherwise return `false` |
 | IsWhiteSpace() | Return `true` if the value is whitespace only otherwise return `false` |
 | HasValue() | Return `true` if the string has any value, it is simply a wrapper around `IsNullOrWhiteSpace` without the headache of negation |
-| RemoveSpecialCharacters() | Remove any special characters in the string |
-| RemoveSpaces() | Remove any spaces in the string |
-| RemoveSpecialCharactersAndSpaces() | Remove any special characters or spaces in the string |
 | HasSpecialCharacters() | Return `true` if the value contains any special character otherwise return `false` |
 | HasSpaces() | Return `true` if the value contains any whitespace otherwise return `false` |
 | HasSpecialCharactersOrSpaces() | Return `true` if the value contains any special character or spaces otherwise return `false`  |
+| HasHTMLTags() | Returns `true` if the string has HTML tags, else returns `false` |
+| RemoveSpecialCharacters() | Remove any special characters in the string |
+| RemoveSpaces() | Remove any spaces in the string |
+| RemoveSpecialCharactersAndSpaces() | Remove any special characters or spaces in the string |
+| RemoveHTMLTags() | Remove any HTML tags from the string value | 
 | IsValidUrl() | Return `true` if the value is valid url otherwise return `false` |
 | ExtractUrls() | Extract any valid url from the specified string |
-| IsValidEmail() | Return true if the value is valid email otherwise return false |
+| IsValidEmail() | Return `true` if the value is valid email otherwise return `false` |
 | ExtractEmails() | Extract any valid email from the specified string |
  
 ### DateTime Extensions:
@@ -46,6 +48,7 @@ soon as well.
 | -- | -- |
 | ToPaginatedListAsync\<T>() | A very simple method for pagination, it is generic which can work on your main entity or projection type. It takes page number and page size and handle the pagination calculations and returns two objects, the first one is the `IEnumerable<T>` with the specified number of records and meta data object with pagination data |
 | WhereIf\<T>() | Filters a sequence of values based on a predicate with apply predicate condtion either to apply the predicate or not |
+| Sort\<T>() | Sorts the elements of a sequence according to a key(s) and order direction, very useful when you have sort by feature. Just define a string with keys and sort direction like the following: `"name desc,country,age asce"` |
 
 ### Enumerable Extensions:
 | Method | Description |

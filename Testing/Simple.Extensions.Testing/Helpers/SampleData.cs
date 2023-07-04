@@ -55,4 +55,15 @@ internal class SampleData
             new User() { Id = 3, Name = "c", Country = "UAE", DateOfBirth = new DateTime(1995, 5, 1) },
             new User() { Id = 4, Name = "d", Country = "Saudi", DateOfBirth = new DateTime(1999, 6, 22) },
         };
+
+    public static IQueryable<User> UnSortedUsers
+        => new[]
+        {
+            new User() { Id = 2, Name = "z", Country = "Egypt", DateOfBirth = new DateTime(2001, 3, 23) },
+            new User() { Id = 5, Name = "b", Country = "Saudi", DateOfBirth = new DateTime(1990, 4, 12) },
+            new User() { Id = 4, Name = "a", Country = "UAE", DateOfBirth = new DateTime(1995, 5, 1) },
+            new User() { Id = 3, Name = "g", Country = "Brazil", DateOfBirth = new DateTime(1999, 6, 22) },
+            new User() { Id = 1, Name = "b", Country = "America", DateOfBirth = new DateTime(1984, 10, 28) },
+            new User() { Id = 6, Name = "f", Country = "Egypt", DateOfBirth = new DateTime(1984, 10, 28) },
+        }.AsQueryable();
 }

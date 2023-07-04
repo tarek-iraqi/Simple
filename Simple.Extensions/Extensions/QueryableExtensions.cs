@@ -1,10 +1,13 @@
 ﻿using Simple.Extensions.BaseTypes;
+using Simple.Extensions.ExtensionHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+
 
 namespace Simple.Extensions
 {
@@ -80,6 +83,26 @@ namespace Simple.Extensions
             if (applyPredicate is null) throw new ArgumentNullException(nameof(applyPredicate));
 
             return applyPredicate() ? source.Where(predicate) : source;
+        }
+
+        /// <summary>
+        /// Sorts the elements of a sequence according to a key(s) and order direction
+        /// </summary>
+        /// <typeparam name="TSource">A sequence of values to order</typeparam>
+        /// <param name="source">The type of the elements of source</param>
+        /// <param name="orderByQueryString">string contains the key(s) and order direction to sort the sequence with,
+        /// if the keys is unknown or the parameter is null or empty the sequence will be sorted by first property in ascending order</param>
+        /// <returns><see cref="IQueryable{T}"/> whose elements are sorted according to a key and direction</returns>
+        public static IQueryable<TSource> Sort<TSource>(this IQueryable<TSource> source, string orderByQueryString = default)
+        {
+            if (string.IsNullOrWhiteSpace(orderByQueryString))
+                orderByQueryString = string.Empty;
+
+            var orderQuery = OrderQueryBuilder.CreateOrderQuery<TSource>(orderByQueryString);
+
+            return string.IsNullOrWhiteSpace(orderQuery)
+                ? source
+                : source.OrderBy(orderQuery);
         }
     }
 }
