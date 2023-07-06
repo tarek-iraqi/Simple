@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace Simple.Extensions
@@ -153,5 +155,17 @@ namespace Simple.Extensions
 
             return regex.Matches(str).Cast<Match>().Select(m => m.Value);
         }
+
+        /// <summary>
+        /// Parses the text representing a single JSON value into a <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">The type to deserialize the JSON value into</typeparam>
+        /// <param name="json">JSON text to parse</param>
+        /// <param name="options">Options to control the behavior during parsing</param>
+        /// <returns>The value converted from JSON text</returns>
+        public static T FromJsonTo<T>(this string json, JsonSerializerOptions options = null)
+            => string.IsNullOrWhiteSpace(json)
+            ? throw new ArgumentNullException(nameof(json))
+            : JsonSerializer.Deserialize<T>(json, options);
     }
 }

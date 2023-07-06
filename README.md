@@ -32,11 +32,13 @@ soon as well.
 | ExtractUrls() | Extract any valid url from the specified string |
 | IsValidEmail() | Return `true` if the value is valid email otherwise return `false` |
 | ExtractEmails() | Extract any valid email from the specified string |
+| FromJsonTo\<T>() | Parses the text representing a single JSON value into a type|
  
 ### DateTime Extensions:
 | Method | Description |
 | -- | -- |
 | ToUnixTimeStamp() | Convert any `DateTime` to unix timestamp |
+| GetDateRangeTo() | Create a DateTime range between from and to DateTime |
 
 ### Long Extensions:
 | Method | Description |
@@ -66,5 +68,9 @@ soon as well.
 | -- | -- |
 | GetAttribute\<T>() | Direct way to retrieve any attribute data associated with `enum` type whether it is built in attribute as `DescriptionAttribute` or any custom attribute |
 
+### Generic Type Extensions:
+| Method | Description |
+| -- | -- |
+| ToJson\<T>() | Converts the provided value into a string |
 
 You can refer to the unit tests in the repo to see some basic usage for each method.

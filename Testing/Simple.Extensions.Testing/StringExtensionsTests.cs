@@ -1,4 +1,6 @@
 using FluentAssertions;
+using System.Text.Json;
+using static Simple.Extensions.Testing.Helpers.SampleData;
 
 namespace Simple.Extensions.Testing;
 
@@ -416,5 +418,46 @@ public class StringExtensionsTests
     public void RemoveHTMLTags_TextWithHTML_ReturnTextWithoutHTML(string str, string expected)
     {
         str.RemoveHTMLTags().Should().Be(expected);
+    }
+
+    [Theory]
+    [InlineData("")]
+    [InlineData(null)]
+    [InlineData("   ")]
+    public void FromJsonTo_EmptyOrNullJson_ThrowException(string str)
+    {
+        var act = () => str.FromJsonTo<Person>();
+
+        act.Should().Throw<ArgumentNullException>().WithParameterName("json");
+    }
+
+    [Fact]
+    public void FromJsonTo_DifferentTypeValue_ObjectWithDefaultValues()
+    {
+        var data = """{"Address":"abc","IsCurrent":true}""";
+
+        var result = data.FromJsonTo<Person>();
+
+        result.Should().BeEquivalentTo(new Person(0, null!));
+    }
+
+    [Fact]
+    public void FromJsonTo_RandomStringValue_ThrowException()
+    {
+        var data = "abc dfdfdfdf";
+
+        var act = () => data.FromJsonTo<Person>();
+
+        act.Should().Throw<JsonException>();
+    }
+
+    [Fact]
+    public void FromJsonTo_ValidTypeValue_ValidObject()
+    {
+        var data = """"{"Id":1,"Name":"tarek"}"""";
+
+        var result = data.FromJsonTo<Person>();
+
+        result.Should().BeEquivalentTo(new Person(1, "tarek"));
     }
 }
