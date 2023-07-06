@@ -72,7 +72,7 @@ namespace Simple.Extensions
         /// Indicates whether a specified string has HTML tags
         /// </summary>
         /// <param name="str"></param>
-        /// <returns>Returns <see cref="bool">true</see> if the string has HTML tags, else returns <see cref="bool">false</see></returns
+        /// <returns>Returns <see cref="bool">true</see> if the string has HTML tags, else returns <see cref="bool">false</see></returns>
         public static bool HasHTMLTags(this string str)
             => str != default && Regex.Match(str, "<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>").Success;
 
@@ -114,7 +114,7 @@ namespace Simple.Extensions
         /// Indicates whether the specified string is valid url
         /// </summary>
         /// <param name="str"></param>
-        /// <returns>Return <see cref="bool">true</see> if the value is valid url otherwise return <see cref="bool">false</see></returns>HTML
+        /// <returns>Return <see cref="bool">true</see> if the value is valid url otherwise return <see cref="bool">false</see></returns>
         public static bool IsValidUrl(this string str)
             => str != default &&
                Regex.Match(str, "^https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$").Success;
